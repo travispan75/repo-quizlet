@@ -14,6 +14,10 @@ class Context:
         
         self.syntax_trees = {}
         
+        self.symbol_table = {}
+        
+        self.refer
+        
     def _dfs_repo_tree(self, root: str, indent: int = 0):
         print("  " * indent + root)
         for child in self.adjacency_list.get(root, []):

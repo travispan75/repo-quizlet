@@ -29,7 +29,7 @@ class ScanFilesStep(BaseStep):
             for f in files:
                 full = os.path.join(root, f)
                 rel  = os.path.relpath(full, repo_path)
-                ext  = os.path.splitext(f)[1][1:] or None
+                ext  = os.path.splitext(f)[1] or None
 
                 ctx.repo_entries.append({
                     "rel_path": rel,

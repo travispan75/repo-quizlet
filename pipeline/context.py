@@ -16,7 +16,9 @@ class Context:
         
         self.symbol_table = {}
         
-        self.refer
+        self.reference_list = []
+        
+        self.imports_by_path = {}
         
     def _dfs_repo_tree(self, root: str, indent: int = 0):
         print("  " * indent + root)

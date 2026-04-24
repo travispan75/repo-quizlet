@@ -1,50 +1,47 @@
+from collections import defaultdict
+from typing import Any, DefaultDict
+from tempfile import TemporaryDirectory
+
+from pipeline.models import Chunk, File, Occurrence, Symbol
+
+
 class Context:
-    def __init__(self, repo_path: str):
+    def __init__(
+        self,
+        repo_path: str,
+        job_id: str | None = None,
+        repo_name: str | None = None,
+        repo_url: str | None = None,
+    ):
+        self.job_id = job_id
+        self.repo_name = repo_name
         self.repo_path = repo_path
+        self.repo_url = repo_url
 
-        self.repo_entries = []
-        self.adjacency_list = {}
-        
-        self.entry_by_path = {}
-        self.files_by_category = {}
-        
-        self.repo_tree = {}
-        
-        self.file_contents = {}
-        
-        self.syntax_trees = {}
-        
-        self.symbol_table = {}
-        
-        self.reference_list = []
-        
-        self.imports_by_path = {}
-        
-    def _dfs_repo_tree(self, root: str, indent: int = 0):
-        print("  " * indent + root)
-        for child in self.adjacency_list.get(root, []):
-            self._dfs_repo_tree(child, indent + 1)
-    
-    def _debug_print(self, debug_repo_path: bool = False, debug_counts: bool = False, debug_keys: bool = False, debug_repo_tree: bool = False):
-        if debug_repo_path:
-            print(f"[Context] repo_path = {self.repo_path}")
+        self.language_list: set[str] = set()
 
-        if debug_counts:
-            print(
-                "[Context counts]",
-                f"entries={len(self.repo_entries)}, "
-                f"adjacency={len(self.adjacency_list)}, "
-                f"files={len(self.file_contents)}, "
-                f"syntax_trees={len(self.syntax_trees)}",
-            )
+        self.scip_artifacts_path: str | None = None
+        self.scip_tempdir: TemporaryDirectory[str] | None = None
 
-        if debug_keys:
-            print(
-                "[Context keys]",
-                f"files_by_category={list(self.files_by_category.keys())}, "
-                f"entry_by_path={list(self.entry_by_path.keys())[:5]}",
-            )
-            
-        if debug_repo_tree:
-            print("[Context repo tree]")
-            self._dfs_repo_tree(".")
+        self.scip_indexes: dict[str, Any] = {}
+
+        self.symbol_table: dict[str, Symbol] = {}
+        self.occurrence_table: dict[str, Occurrence] = {}
+        self.file_table: dict[str, File] = {}
+
+        self.definition_map: DefaultDict[str, list[str]] = defaultdict(list)
+        self.reference_map: DefaultDict[str, list[str]] = defaultdict(list)
+
+        self.file_to_symbol_map: DefaultDict[str, set[str]] = defaultdict(set)
+        self.symbol_to_file_map: DefaultDict[str, set[str]] = defaultdict(set)
+
+        self.call_graph: DefaultDict[str, set[str]] = defaultdict(set)
+        self.called_by_graph: DefaultDict[str, set[str]] = defaultdict(set)
+
+        self.dependency_graph: DefaultDict[str, DefaultDict[str, int]] = defaultdict(
+            lambda: defaultdict(int)
+        )
+
+        self.graph_clusters: list[dict[str, str]] = []
+
+        self.chunks: list[Chunk] = []

@@ -2,5 +2,30 @@
 __pycache__/
 *.pyc
 *.pyo
-pipeline/out.log
-pipeline/.venv/
+.pytest_cache/
+.env
+*.env
+
+# Backend
+backend/.venv/
+backend/node_modules/
+backend/data/
+backend/out.log
+backend/pipeline/.cache/
+backend/pipeline/.cache_tmp/
+backend/pipeline/context/.cache/
+backend/pipeline/questions/.cache/
+backend/pipeline/questions/repos/
+backend/pipeline/tests/.ctx_cache/
+backend/pipeline/**/out.log
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Local-only scripts (legacy)
+pipeline/wipe_repo.py
+pipeline/flood.py
+
+AGENTS.md

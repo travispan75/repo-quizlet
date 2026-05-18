@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Worker (backend)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell.exe -NoProfile -Command \"& '${workspaceFolder}\\backend\\pipeline\\.venv\\Scripts\\python.exe' -m pipeline.worker.main *> '${workspaceFolder}\\backend\\pipeline\\worker\\out.log'\"",
+      "cwd": "${workspaceFolder}\\backend"
+    },
+    {
+      "name": "FastAPI (backend)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell.exe -NoProfile -Command \"& '${workspaceFolder}\\backend\\pipeline\\.venv\\Scripts\\python.exe' -m uvicorn app:app --host 0.0.0.0 --port 5000 *> '${workspaceFolder}\\backend\\app.log'\"",
+      "cwd": "${workspaceFolder}\\backend"
+    },
+    {
+      "name": "Pytest (context)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell.exe -NoProfile -Command \"& '${workspaceFolder}\\backend\\pipeline\\.venv\\Scripts\\python.exe' -m pytest '${workspaceFolder}\\backend\\pipeline\\context\\tests' -v -s *> '${workspaceFolder}\\backend\\pipeline\\context\\out.log'\"",
+      "cwd": "${workspaceFolder}\\backend"
+    },
+    {
+      "name": "Pytest (questions)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell.exe -NoProfile -Command \"& '${workspaceFolder}\\backend\\pipeline\\.venv\\Scripts\\python.exe' -m pytest '${workspaceFolder}\\backend\\pipeline\\questions\\tests' -v -s *> '${workspaceFolder}\\backend\\pipeline\\questions\\out.log'\"",
+      "cwd": "${workspaceFolder}\\backend"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "python.defaultInterpreterPath": "${workspaceFolder}\\pipeline\\.venv\\Scripts\\python.exe"
+}

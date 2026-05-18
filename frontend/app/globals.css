@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Semantic color tokens. Components reference these via utilities like
+   `bg-card`, `text-fg-muted`, `border-border`, etc. Theme switching is a
+   single CSS-variable swap on `.dark` — no `dark:` variants in markup. */
+
+:root {
+  --background:        #ffffff;
+  --foreground:        #171717;
+
+  --card:              #ffffff;
+  --card-hover:        #fafafa;
+  --muted:             #e5e5e5;
+  --muted-hover:       #d4d4d4;
+  --surface:           #f7f7f7;
+
+  --border:            #d4d4d4;
+  --border-hover:      #a3a3a3;
+
+  --fg:                #171717;
+  --fg-muted:          #404040;
+  --fg-subtle:         #737373;
+  --fg-faint:          #a3a3a3;
+
+  --success:           #16a34a;
+  --success-fg:        #15803d;
+  --success-bg:        #f0fdf4;
+  --success-border:    #16a34a;
+
+  --danger:            #dc2626;
+  --danger-fg:         #b91c1c;
+  --danger-bg:         #fef2f2;
+  --danger-border:     #dc2626;
+
+  --info-fg:           #1d4ed8;
+  --info-bg:           #eff6ff;
+  --info-bg-hover:     #dbeafe;
+  --info-border:       #bfdbfe;
+  --info-border-hover: #93c5fd;
+
+  --primary:           #2563eb;
+  --primary-hover:     #1d4ed8;
+  --selection-border:  #3b82f6;
+  --selection-bg:      #eff6ff;
+
+  --gutter:            #6b7280;
+  --scrollbar-thumb:       rgba(0, 0, 0, 0.30);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.50);
+
+  --hl-correct:        rgba(187, 247, 208, 0.6);
+  --hl-hint:           rgba(254, 240, 138, 0.6);
+  --hl-incorrect:      rgba(254, 202, 202, 0.6);
+  --hl-selected:       rgba(219, 234, 254, 0.6);
+  --hl-selected-hover: rgba(219, 234, 254, 0.3);
+  --hl-hover:          rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --background:        #0a0a0a;
+  --foreground:        #ededed;
+
+  --card:              #171717;
+  --card-hover:        #262626;
+  --muted:             #262626;
+  --muted-hover:       #404040;
+  --surface:           #141414;
+
+  --border:            #2e2e2e;
+  --border-hover:      #525252;
+
+  --fg:                #ededed;
+  --fg-muted:          #d4d4d4;
+  --fg-subtle:         #a3a3a3;
+  --fg-faint:          #737373;
+
+  --success:           #22c55e;
+  --success-fg:        #86efac;
+  --success-bg:        rgba(20, 83, 45, 0.40);
+  --success-border:    #22c55e;
+
+  --danger:            #f87171;
+  --danger-fg:         #fca5a5;
+  --danger-bg:         rgba(127, 29, 29, 0.40);
+  --danger-border:     #ef4444;
+
+  --info-fg:           #93c5fd;
+  --info-bg:           rgba(30, 58, 138, 0.40);
+  --info-bg-hover:     rgba(30, 58, 138, 0.60);
+  --info-border:       #1e3a8a;
+  --info-border-hover: #1e40af;
+
+  --primary:           #2563eb;
+  --primary-hover:     #1d4ed8;
+  --selection-border:  #60a5fa;
+  --selection-bg:      rgba(30, 58, 138, 0.40);
+
+  --gutter:            #6b7280;
+  --scrollbar-thumb:       rgba(255, 255, 255, 0.25);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.45);
+
+  --hl-correct:        rgba(34, 197, 94, 0.30);
+  --hl-hint:           rgba(234, 179, 8, 0.30);
+  --hl-incorrect:      rgba(239, 68, 68, 0.30);
+  --hl-selected:       rgba(59, 130, 246, 0.30);
+  --hl-selected-hover: rgba(96, 165, 250, 0.50);
+  --hl-hover:          rgba(255, 255, 255, 0.08);
+}
+
+@theme inline {
+  --color-background:        var(--background);
+  --color-foreground:        var(--foreground);
+
+  --color-card:              var(--card);
+  --color-card-hover:        var(--card-hover);
+  --color-muted:             var(--muted);
+  --color-muted-hover:       var(--muted-hover);
+  --color-surface:           var(--surface);
+
+  --color-border:            var(--border);
+  --color-border-hover:      var(--border-hover);
+
+  --color-fg:                var(--fg);
+  --color-fg-muted:          var(--fg-muted);
+  --color-fg-subtle:         var(--fg-subtle);
+  --color-fg-faint:          var(--fg-faint);
+
+  --color-success:           var(--success);
+  --color-success-fg:        var(--success-fg);
+  --color-success-bg:        var(--success-bg);
+  --color-success-border:    var(--success-border);
+
+  --color-danger:            var(--danger);
+  --color-danger-fg:         var(--danger-fg);
+  --color-danger-bg:         var(--danger-bg);
+  --color-danger-border:     var(--danger-border);
+
+  --color-info-fg:           var(--info-fg);
+  --color-info-bg:           var(--info-bg);
+  --color-info-bg-hover:     var(--info-bg-hover);
+  --color-info-border:       var(--info-border);
+  --color-info-border-hover: var(--info-border-hover);
+
+  --color-primary:           var(--primary);
+  --color-primary-hover:     var(--primary-hover);
+  --color-selection-border:  var(--selection-border);
+  --color-selection-bg:      var(--selection-bg);
+
+  --color-hl-correct:        var(--hl-correct);
+  --color-hl-hint:           var(--hl-hint);
+  --color-hl-incorrect:      var(--hl-incorrect);
+  --color-hl-selected:       var(--hl-selected);
+  --color-hl-selected-hover: var(--hl-selected-hover);
+  --color-hl-hover:          var(--hl-hover);
+
+  --font-sans: var(--font-jakarta);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+pre.shiki code {
+  counter-reset: line;
+}
+
+pre.shiki .line {
+  display: block;
+  min-height: 1lh;
+  padding-left: 4em;
+  position: relative;
+}
+
+pre.shiki .line::before {
+  counter-increment: line;
+  content: counter(line);
+  position: absolute;
+  left: 0;
+  width: 2.5em;
+  text-align: right;
+  color: var(--gutter);
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Shiki dual-theme output. Token colors swap via the per-span `--shiki-dark`
+   var under `.dark`. The pre's own background is dropped so code always blends
+   with whatever panel it's mounted in. */
+pre.shiki {
+  background-color: transparent !important;
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+@keyframes citation-flash {
+  0%   { background-color: rgba(250, 204, 21, 0.5); }
+  100% { background-color: transparent; }
+}
+
+.line.citation-flash {
+  animation: citation-flash 2s ease-out forwards;
+}
+
+.scroll-on-hover {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scroll-on-hover:hover {
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+.scroll-on-hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-on-hover::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-on-hover::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+.scroll-on-hover:hover::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+}
+
+.scroll-on-hover:hover::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.tabs-scroll {
+  scrollbar-width: none;
+}
+
+.tabs-scroll::-webkit-scrollbar {
+  display: none;
+}

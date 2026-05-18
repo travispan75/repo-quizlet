@@ -1,7 +1,0 @@
-﻿grpcio==1.80.0
-grpcio-tools==1.80.0
-networkx==3.5
-sentence-transformers>=3.0.0
-python-louvain==0.16
-protobuf==6.33.6
-typing_extensions==4.15.0

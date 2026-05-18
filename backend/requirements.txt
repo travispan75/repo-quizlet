@@ -13,6 +13,7 @@ cloudpickle>=3.0.0
 openai>=1.50.0
 psycopg[binary]>=3.2.0
 python-dotenv>=1.0.0
+requests>=2.32.0
 tqdm>=4.66.0
 seedir>=0.5.0
 upstash-redis>=1.0.0

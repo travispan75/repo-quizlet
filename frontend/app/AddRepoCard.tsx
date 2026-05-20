@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { backend } from "@/lib/backend";
 
+const REPO_SUBMIT_DISABLED =
+  process.env.NEXT_PUBLIC_DISABLE_REPO_SUBMIT === "true";
+
 export default function AddRepoCard() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -36,6 +39,15 @@ export default function AddRepoCard() {
     if (loading || !url.trim()) return;
     setLoading(true);
     setError(null);
+
+    if (REPO_SUBMIT_DISABLED) {
+      setError(
+        "Sorry, I can't afford tokens lol. You can run it locally.",
+      );
+      setLoading(false);
+      return;
+    }
+
     try {
       const { id } = await backend.submitRepo(url.trim());
       router.push(`/quiz/${id}`);
